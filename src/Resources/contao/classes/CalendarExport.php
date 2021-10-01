@@ -72,8 +72,10 @@ class CalendarExport extends \Backend
         $startdate = (strlen($arrArchive['ical_start'])) ? $arrArchive['ical_start'] : time();
         $enddate = (strlen($arrArchive['ical_end'])) ? $arrArchive['ical_end'] : time() + $GLOBALS['calendar_ical']['endDateTimeDifferenceInDays'] * 24 * 3600;
         $filename = strlen($arrArchive['ical_alias']) ? $arrArchive['ical_alias'] : 'calendar' . $arrArchive['id'];
+        $privateCalendar = $arrArchive['make_it_private'] ? true : false;
+        $privateTextReplacement = strlen($arrArchive['private_text_replacement']) ? $arrArchive['private_text_replacement'] : "";
         $ical = $this->getAllEvents(array($arrArchive['id']), $startdate, $enddate, $arrArchive['title'],
-            $arrArchive['ical_description'], $filename, $arrArchive['ical_prefix']);
+            $arrArchive['ical_description'], $filename, $arrArchive['ical_prefix'], $privateCalendar,$privateTextReplacement);
         $content = $ical->createCalendar();
         $objFile = new \File('web/share/' . $filename . '.ics');
         $objFile->write($content);
@@ -127,7 +129,9 @@ class CalendarExport extends \Backend
         $title,
         $description,
         $filename = "",
-        $title_prefix
+        $title_prefix,
+        $privateCalendar,
+        $privateTextReplacement = ""
     ) {
         if (!is_array($arrCalendars)) {
             return array();
@@ -192,12 +196,19 @@ class CalendarExport extends \Backend
                             array('VALUE' => 'DATE'));
                     }
                 }
+                if ($privateCalendar) {
+                    $vevent->setProperty('summary',
+                        html_entity_decode((strlen($privateTextReplacement) ? $privateTextReplacement  : ""),ENT_QUOTES, 'UTF-8'));
+                    $vevent->setProperty('description',
+                        html_entity_decode((strlen($privateTextReplacement) ? $privateTextReplacement : ""),ENT_QUOTES, 'UTF-8'));
+                } else {
 
-                $vevent->setProperty('summary',
-                    html_entity_decode((strlen($title_prefix) ? $title_prefix . " " : "") . $objEvents->title,
-                        ENT_QUOTES, 'UTF-8'));
-                $vevent->setProperty('description', html_entity_decode(strip_tags(preg_replace('/<br \\/>/', "\n",
-                    $this->replaceInsertTags($objEvents->teaser))), ENT_QUOTES, 'UTF-8'));
+                    $vevent->setProperty('summary',
+                        html_entity_decode((strlen($title_prefix) ? $title_prefix . " " : "") . $objEvents->title,
+                            ENT_QUOTES, 'UTF-8'));
+                    $vevent->setProperty('description', html_entity_decode(strip_tags(preg_replace('/<br \\/>/', "\n",
+                        $this->replaceInsertTags($objEvents->teaser))), ENT_QUOTES, 'UTF-8'));
+                }
 
                 if ($objEvents->cep_location) {
                     $vevent->setProperty('location',

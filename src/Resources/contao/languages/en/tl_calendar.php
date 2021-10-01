@@ -27,3 +27,5 @@ $GLOBALS['TL_LANG']['tl_calendar']['ical_timezone']      = array('Timezone', 'Pl
 $GLOBALS['TL_LANG']['tl_calendar']['ical_start']    = array('Start date', 'Please enter the start date of the calendar. If you do not enter a date, the actual date will be taken as start date.');
 $GLOBALS['TL_LANG']['tl_calendar']['ical_end']      = array('End date', 'Please enter the end date of the calendar. If you do not enter a date, the date in one year will be taken as end date.');
 $GLOBALS['TL_LANG']['tl_calendar']['ical_legend']      = 'iCal settings';
+$GLOBALS['TL_LANG']['tl_calendar']['make_it_private'] = array('Eventdescriptions are private','no or replaced tile/sumary in the exported events');
+$GLOBALS['TL_LANG']['tl_calendar']['private_text_replacement'] = array('Private replacement','the text which appears instead of title and summary if private is activated');

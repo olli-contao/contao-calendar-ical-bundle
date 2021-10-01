@@ -41,3 +41,7 @@ $GLOBALS['TL_LANG']['tl_calendar']['ical_start']['1'] = "Bitte geben Sie das Sta
 $GLOBALS['TL_LANG']['tl_calendar']['ical_end']['0'] = "Enddatum";
 $GLOBALS['TL_LANG']['tl_calendar']['ical_end']['1'] = "Bitte geben Sie das Endatum ein, bis zu dem Contao Termine aus den ausgewählten Kalendern extrahieren soll.  Wenn Sie kein Datum angeben, wird das Datum in einem Jahr als Enddatum verwendet.";
 $GLOBALS['TL_LANG']['tl_calendar']['ical_legend'] = "iCal Einstellungen";
+$GLOBALS['TL_LANG']['tl_calendar']['make_it_private'][0] = "Beschreibungen sind privat";
+$GLOBALS['TL_LANG']['tl_calendar']['make_it_private'][1] = "kein bzw ersetzte Titel/Zusammenfassung in den Events Exports";
+$GLOBALS['TL_LANG']['tl_calendar']['private_text_replacement'][0] = "Privat Ersetzungstext";
+$GLOBALS['TL_LANG']['tl_calendar']['private_text_replacement'][1] = "Wenn 'privat' aktiviert ist wird folgender Text ersetzt";

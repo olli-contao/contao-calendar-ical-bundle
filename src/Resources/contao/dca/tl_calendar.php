@@ -16,7 +16,7 @@ $GLOBALS['TL_DCA']['tl_calendar']['config']['onsubmit_callback'][] = array('Cale
 $GLOBALS['TL_DCA']['tl_calendar']['palettes']['default'] = $GLOBALS['TL_DCA']['tl_calendar']['palettes']['default'] . ';{ical_legend:hide},make_ical,ical_source';
 $GLOBALS['TL_DCA']['tl_calendar']['palettes']['__selector__'][] = 'make_ical';
 $GLOBALS['TL_DCA']['tl_calendar']['palettes']['__selector__'][] = 'ical_source';
-$GLOBALS['TL_DCA']['tl_calendar']['subpalettes']['make_ical'] = 'ical_alias,ical_prefix,ical_description,ical_start,ical_end';
+$GLOBALS['TL_DCA']['tl_calendar']['subpalettes']['make_ical'] = 'ical_alias,ical_prefix,ical_description,ical_start,ical_end,make_it_private,private_text_replacement';
 $GLOBALS['TL_DCA']['tl_calendar']['subpalettes']['ical_source'] = 'ical_url,ical_proxy,ical_bnpw,ical_port,ical_filter_event_title,ical_pattern_event_title,ical_replacement_event_title,ical_timezone,ical_cache,ical_source_start,ical_source_end';
 
 $GLOBALS['TL_DCA']['tl_calendar']['fields']['make_ical'] = array
@@ -212,6 +212,27 @@ $GLOBALS['TL_DCA']['tl_calendar']['fields']['ical_source_end'] = array
     'inputType'               => 'text',
     'eval'                    => array('mandatory'=>false,'maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard'),
     'sql'                     => "varchar(12) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_calendar']['fields']['make_it_private'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['make_it_private'],
+    'exclude'                 => true,
+    'filter'                  => true,
+    'inputType'               => 'checkbox',
+    'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
+    'sql'                     => "char(1) NOT NULL default ''"
+);
+
+
+$GLOBALS['TL_DCA']['tl_calendar']['fields']['private_text_replacement'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['private_text_replacement'],
+    'exclude'                 => true,
+    'search'                  => true,
+    'inputType'               => 'text',
+    'eval'                    => array('maxlength'=>128, 'tl_class'=>'w50'),
+    'sql'                     => "varchar(128) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_calendar']['fields']['ical_importing'] = array
